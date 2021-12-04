@@ -59,6 +59,13 @@ class SudokuPuzzle:
             else:
                 print()
 
+    #returns the puzzle in list form so we can comapare to user answers.
+    def solvedPuzzle(self):
+        resultPuzzle = []
+        for rows in range(9):
+            resultPuzzle.append(self.puzzle[rows])
+        return resultPuzzle
+
     def check(self, puzzle):
         
         #check rows
@@ -178,7 +185,9 @@ BLACK = (0,0,0)
 WHITE = (255, 255, 255)
 move = ""
 
+print("drawing board")
 drawBoard()
+print("board drawn")
 clock = pygame.time.Clock()
 while Play:
     for event in pygame.event.get():
@@ -188,6 +197,9 @@ while Play:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_s:
                 myPuzzle.solve()
+                print("Puzzle is solved")
+                Play = False
+                
             if event.key == pygame.K_r:
                 myPuzzle.reset()
     if move != "":
@@ -211,8 +223,14 @@ while Play:
     #print("Enter next move")
     #move = input()
 
+print("Before quit")
 pygame.quit()
-myPuzzle = SudokuPuzzle()
+print("The result is...")
+#this holds the puzzle rather than just printing it out for us to compare
+final = myPuzzle.solvedPuzzle()
+print(final)
+
+#myPuzzle = SudokuPuzzle()
 #myPuzzle.printPuzzle()
 
 #print(myPuzzle.check(myPuzzle.puzzle))
